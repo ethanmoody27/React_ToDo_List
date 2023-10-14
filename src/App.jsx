@@ -24,25 +24,31 @@ function App() {
       return item;
     });
 
-    setToDoItems(updatedItems);
+    const sortedItems = updatedItems.sort((a, b) => (a.completed === b.completed ? 0 : a.completed ? 1 : -1));
+
+    setToDoItems(sortedItems);
   };
 
   const removeToDo = (id) => {
     const updatedItems = toDoItems.filter((item) => item.id !== id);
+
     setToDoItems(updatedItems);
   }
 
   return (
     <>
-      <h1>To-Do List</h1>
-      <ToDoForm addToDo={addToDo} />
-      <ToDoList
-        toDoItems={toDoItems}
-        markComplete={markComplete}
-        removeToDo={removeToDo}
-        />
+      <div class="App">
+        <h1>To-Do List</h1>
+        <ToDoForm addToDo={addToDo} />
+        <ToDoList
+          toDoItems={toDoItems}
+          markComplete={markComplete}
+          removeToDo={removeToDo}
+          />
+        </div>
     </>
   );
 }
 
-export default App
+export default App;
+
